@@ -180,20 +180,6 @@ done
 
 ---
 
-## 📄 Licencia
-
-MIT — contribuciones bienvenidas 🚀
-
----
-
-## 💻 Creado Por
-
-## 📄 Licencia
-
-MIT — contribuciones bienvenidas 🚀
-
----
-
 ## 👨‍💻 Desarrollado por Isaac Esteban Haro Torres
 
 **Ingeniero en Sistemas · Full Stack · Automatización · Data**
