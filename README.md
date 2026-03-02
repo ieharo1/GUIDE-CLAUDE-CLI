@@ -1,195 +1,115 @@
-# Claude CLI Complete Guide 🚀
+﻿# Claude CLI Professional Guide
+[![Docker Ready](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Node.js 20](https://img.shields.io/badge/Node.js-20-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Language: English](https://img.shields.io/badge/Language-English-blue)](#)
+[![Status: Production Ready](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)](#)
 
-Professional technical guide to install and use Claude CLI from scratch.
+A practical guide to run Claude CLI locally and in Docker, designed to make this repository portfolio-grade for engineering and DevOps audiences.
 
-This repository is designed for developers and engineers who want to integrate Claude into local and automated workflows.
+## Goals
 
----
+- Run Claude CLI in minutes.
+- Standardize execution with Docker.
+- Support both interactive prompts and script automation.
+- Keep secrets out of source control.
 
-## 📌 What is Claude CLI?
+## Stack
 
-Claude CLI is the official command-line interface to interact with Claude, the language model developed by Anthropic.
+- Claude CLI (`@anthropic-ai/claude-cli`)
+- Node.js 20
+- Docker / Docker Compose
 
-Claude is designed for:
+## Project Structure
 
-- Text generation
-- Technical analysis
-- Code writing
-- Automation
-- Document processing
-- DevOps integration
+```text
+.
+├── Dockerfile
+├── docker-compose.yml
+├── .env.example
+├── entrypoint.sh
+└── README.md
+```
 
-Official website:
-https://www.anthropic.com
+## Requirements
 
-Documentation:
-https://docs.anthropic.com
+- Docker Desktop or Docker Engine + Compose
+- Anthropic API key
 
----
+## 1) Configure environment
 
-## 🎯 What is it for?
+Copy the template and set your key:
 
-- Quick technical queries from terminal
-- Code generation
-- Script automation
-- CI/CD integration
-- File analysis
-- Code refactoring
-- Documentation generation
+```bash
+cp .env.example .env
+```
 
----
+Edit `.env`:
 
-## 🏗 Architecture
+```env
+ANTHROPIC_API_KEY=your_real_api_key
+```
 
-Terminal
-↓
-Claude CLI
-↓
-Anthropic API
-↓
-Claude Model
+## 2) Build image
 
+```bash
+docker compose build
+```
 
-Authentication is handled via API key.
+## 3) Quick usage
 
----
+Show help:
 
-## 💻 Requirements
+```bash
+docker compose run --rm claude --help
+```
 
-- Node.js 18+
-- npm or yarn
-- Anthropic account
-- Valid API key
+Single prompt:
 
----
+```bash
+docker compose run --rm claude "Explain event sourcing in 5 points"
+```
 
-## 🛠 Installation
+Interactive prompt:
 
-### 1️⃣ Install Node.js
+```bash
+docker compose run --rm claude
+```
 
-Download:
-https://nodejs.org
+## 4) Analyze host files
 
-Verify:
-
-node -v
-npm -v
-
-
----
-
-### 2️⃣ Install Claude CLI
-
-npm install -g @anthropic-ai/claude-cli
-
-
-Verify:
-
-claude --help
-
-
----
-
-## 🔐 Configure API Key
-
-Windows (PowerShell):
-
-setx ANTHROPIC_API_KEY "your_api_key"
-
-
-Linux / Mac:
-
-export ANTHROPIC_API_KEY="your_api_key"
-
-
----
-
-## ▶️ Basic Usage
-
-claude "Explain event-driven architecture"
-
-
----
-
-## 🌎 How to Force Spanish Responses
-
-Claude answers in the language of the prompt.
-
-### Option 1: Explicit Language Instruction
-
-claude "Answer in Spanish: Explain hexagonal architecture"
-
-
----
-
-### Option 2: Persistent Alias
-
-alias claude-es='claude "Always answer in professional Spanish:"'
-
-
----
-
-### Option 3: Wrapper Script
-
-#!/bin/bash
-claude "Answer in professional Spanish: $1"
-
-
----
-
-## ⚙ Advanced Configuration
-
-- Select model
-- Adjust temperature
-- Token limits
-- File input redirection
-- Script integration
+Compose mounts `./workspace` into `/workspace` in the container.
 
 Example:
 
-claude "Analyze this code:" < app.py
+```bash
+mkdir -p workspace
+cp app.py workspace/
+docker compose run --rm claude "Review /workspace/app.py and suggest improvements"
+```
 
+## 5) Automation usage
 
----
+```bash
+docker compose run --rm claude "Generate release notes for today changes"
+```
 
-## 🔁 Automation Example
+Use CI secrets to inject `ANTHROPIC_API_KEY` per environment.
 
-for file in *.js; do
-claude "Generate documentation:" < "$file"
-done
+## Security
 
+- Do not commit `.env`.
+- Rotate API keys regularly.
+- Use dedicated keys per environment.
+- Check logs before sharing.
 
----
+## Troubleshooting
 
-## 🛡 Best Practices
+- `Missing ANTHROPIC_API_KEY`: verify `.env`.
+- API/network errors: validate connectivity and Anthropic quota.
+- Mounted file issues: verify paths under `./workspace`.
 
-- Never commit API keys
-- Use environment variables
-- Rotate credentials
-- Apply usage monitoring
+## License
 
----
+MIT
 
-## 🚀 Professional Use Cases
-
-- Automated documentation
-- Code review assistant
-- DevOps helper
-- Security auditing
-- Test generation
-
----
-
-## 👨‍💻 Desarrollado por Isaac Esteban Haro Torres
-
-**Ingeniero en Sistemas · Full Stack · Automatización · Data**
-
-- 📧 Email: zackharo1@gmail.com
-- 📱 WhatsApp: 098805517
-- 💻 GitHub: https://github.com/ieharo1
-- 🌐 Portafolio: https://ieharo1.github.io/portafolio-isaac.haro/
-
----
-
-© 2026 Isaac Esteban Haro Torres - Todos los derechos reservados.
-  

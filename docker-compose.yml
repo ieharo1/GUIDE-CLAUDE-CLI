@@ -1,0 +1,11 @@
+﻿services:
+  claude:
+    build: .
+    image: claude-cli-local:latest
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+    working_dir: /workspace
+    volumes:
+      - ./workspace:/workspace
+    stdin_open: true
+    tty: true
